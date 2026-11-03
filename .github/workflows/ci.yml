@@ -19,3 +19,15 @@ jobs:
       - run: pip install -r requirements.txt
 
       - run: pytest
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Imaji build et
+        run: docker build -t cicd-ornek2 .
+
+      - name: Imaji calistir (duman testi)
+        run: docker run --rm cicd-ornek2
